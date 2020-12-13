@@ -90,13 +90,14 @@ module.exports = {
   },
   overrides: [
     {
-      'files': ['*.tsx'],
+      'files': ['*.tsx','*.ts'],
       'rules': {
         'react/prop-types': 'off',
         'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': ['error'],
-        'import/prefer-default-export': 'off',
-        'react/jsx-props-no-spreading': 'off'
+        'react/jsx-props-no-spreading': 'off',
+        "import/prefer-default-export": 'off',
+        "no-console": "off"
       },
     },
   ],
