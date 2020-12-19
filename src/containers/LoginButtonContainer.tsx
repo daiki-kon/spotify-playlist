@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import { LoginButton } from '../components/LoginButton';
-import { getAccessUrl } from '../utils/LoginSpotify';
+import { getAccessUrl } from '../utils/AuthSpotify';
 
-export type EnhancedLoginButton = {
+export type LoginButtonContainerProps = {
   width?: number;
 };
 
-export const EnhancedLoginButton: FC<EnhancedLoginButton> = (props) => {
+export const LoginButtonContainer: FC<LoginButtonContainerProps> = (props) => {
   const { width } = props;
 
   const onClick = () => {
