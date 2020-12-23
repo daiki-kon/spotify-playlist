@@ -7,13 +7,13 @@ export type PlaylistCardProps = {
   coverImageUrl: string;
   playlistName: string;
   description: string;
-  width: number;
+  width?: number;
 };
 
 const StyledCard = styled.div<{ width: number }>`
   position: relative;
   background-color: #262626;
-  width: ${(props) => props.width || 100}%;
+  width: ${(props) => props.width}%;
   padding: 1.5% 1%;
   border-radius: 10px;
 `;
@@ -30,11 +30,11 @@ const StyledCardTitle = styled.p`
 `;
 
 export const PlaylistCard: FC<PlaylistCardProps> = (props) => {
-  const { coverImageUrl, playlistName } = props;
+  const { coverImageUrl, playlistName, width = 100 } = props;
 
   return (
     <>
-      <StyledCard {...props}>
+      <StyledCard width={width}>
         <StyledImage className="content" src={coverImageUrl} />
         <StyledCardTitle>{playlistName}</StyledCardTitle>
       </StyledCard>
