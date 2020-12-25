@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Image } from 'semantic-ui-react';
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
+import { PlaylistButton } from './PlaylistButton';
 
 export type PlaylistCardProps = {
   coverImageUrl: string;
@@ -9,14 +10,6 @@ export type PlaylistCardProps = {
   description: string;
   width?: number;
 };
-
-const StyledCard = styled.div<{ width: number }>`
-  position: relative;
-  background-color: #262626;
-  width: ${(props) => props.width}%;
-  padding: 1.5% 1%;
-  border-radius: 10px;
-`;
 
 const StyledImage = styled(Image)`
   padding-bottom: 10%;
@@ -34,10 +27,10 @@ export const PlaylistCard: FC<PlaylistCardProps> = (props) => {
 
   return (
     <>
-      <StyledCard width={width}>
+      <PlaylistButton width={width}>
         <StyledImage className="content" src={coverImageUrl} />
         <StyledCardTitle>{playlistName}</StyledCardTitle>
-      </StyledCard>
+      </PlaylistButton>
     </>
   );
 };
