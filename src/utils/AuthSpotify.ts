@@ -1,11 +1,9 @@
 import crypto, { randomBytes } from 'crypto';
 
 const scopes: string[] = [
-  'user-read-currently-playing',
-  'user-read-recently-played',
-  'user-read-playback-state',
-  'user-top-read',
-  'user-modify-playback-state',
+  'user-read-private',
+  'user-read-email',
+  'playlist-read-private',
 ];
 
 export const isValidAccessToken = (): boolean => {
