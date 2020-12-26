@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router';
+import { Link } from 'react-router-dom';
 import {
   formatParams,
   isValidState,
@@ -8,6 +9,7 @@ import {
   AuthResult,
   isValidAccessToken,
 } from './utils/AuthSpotify';
+import { PlaylistPage } from './pages/PlaylistPage';
 
 export const AuthWrapper: FC<RouteProps> = (props) => {
   const [isFail, setIsFail] = useState(false);
@@ -26,24 +28,27 @@ export const AuthWrapper: FC<RouteProps> = (props) => {
   };
 
   useEffect(() => {
-    // TODO:  認証の流れ考える
-
     // AccessTokenが有効なら以降の処理をスキップ
     if (isValidAccessToken() === true) {
       console.log('ok');
 
       return;
     }
-
+    console.log(window.location.search);
     const urlParams = window.location.search.substring(1);
+    if (urlParams === '') {
+      setIsFail(true);
+
+      return;
+    }
 
     const authResult: AuthResult =
       urlParams !== ''
         ? formatParams(urlParams)
         : { result: '', state: '', isError: true };
-
     if (isValidState(authResult.state) === false) {
       setIsFail(true);
+      console.error('state is wrong');
 
       return;
     }
@@ -51,8 +56,10 @@ export const AuthWrapper: FC<RouteProps> = (props) => {
   }, []);
 
   return (
+    // 認証に失敗 => スタートページヘリダイレクト
+    //      成功 => PlaylistPageをレンダリング
     <Route
-      render={() => (isFail ? <Redirect to="/" /> : <Route {...props} />)}
+      render={() => (isFail ? <Redirect to="StartPage" /> : <PlaylistPage />)}
     />
   );
 };
