@@ -54,7 +54,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-unused-vars': [
-      'error',
+      'warn',
       {
         'vars': 'all',
         'args': 'after-used',
@@ -97,7 +97,8 @@ module.exports = {
         '@typescript-eslint/no-use-before-define': ['error'],
         'react/jsx-props-no-spreading': 'off',
         "import/prefer-default-export": 'off',
-        "no-console": "off"
+        "no-console": "off",
+        "no-unused-vars": "warn"
       },
     },
   ],
