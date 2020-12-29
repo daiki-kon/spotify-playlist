@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router';
 import './App.css';
 import { AuthWrapper } from './AuthWrapper';
 import { StartPage } from './pages/StartPage';
-import { PlaylistPage } from './pages/PlaylistPage';
 
 function App() {
   return (

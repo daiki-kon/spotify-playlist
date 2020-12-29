@@ -1,6 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router';
-import { Link } from 'react-router-dom';
 import {
   formatParams,
   isValidState,
@@ -11,7 +10,7 @@ import {
 } from './utils/AuthSpotify';
 import { PlaylistPage } from './pages/PlaylistPage';
 
-export const AuthWrapper: FC<RouteProps> = (props) => {
+export const AuthWrapper: FC = () => {
   const [isFail, setIsFail] = useState(false);
 
   const saveAccessToken = async (code: string): Promise<void> => {
