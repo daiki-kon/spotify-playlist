@@ -20,6 +20,5 @@ Primary.args = {
   coverImageUrl:
     'https://i.scdn.co/image/ab67616d0000b273233906d0f076db62a4f819d0',
   playlistName: '洋楽',
-  description: '好きな洋楽',
   width: 20,
 };
