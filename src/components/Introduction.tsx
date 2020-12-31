@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
+import { colorPicker } from '../utils/Color';
 
 export type IntroductionProps = {
   width?: number;
@@ -19,7 +20,7 @@ export const Introduction: FC<IntroductionProps> = (props) => {
 
   return (
     <>
-      <StyledContainer width={width} color="white">
+      <StyledContainer width={width} color={colorPicker('white')}>
         <p>Lets get started</p>
         <p>Create Your Favorite Playlist</p>
       </StyledContainer>

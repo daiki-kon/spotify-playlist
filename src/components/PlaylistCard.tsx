@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { Image } from 'semantic-ui-react';
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
-import { PlaylistButton } from './PlaylistButton';
+import { StyledButton } from './PlaylistButton';
+import { colorPicker } from '../utils/Color';
 import NoCoverImage from '../assets/NoCoverImage.png';
 
 export type PlaylistCardProps = {
@@ -16,10 +17,10 @@ const StyledImage = styled(Image)`
   margin: auto;
 `;
 
-const StyledCardTitle = styled.p`
+const StyledCardTitle = styled.p<{ color: string }>`
   font-size: 16px;
   font-family: Arial;
-  color: #ffffff;
+  color: ${(props) => props.color};
   padding-bottom: 5%;
   text-align: left;
   word-wrap: break-word;
@@ -30,19 +31,25 @@ const StyledCardTitle = styled.p`
   white-space: nowrap;
 `;
 
+const EnhancedStyledButton = styled(StyledButton)<{ backgroundColor: string }>`
+  background-color: ${(props) => props.backgroundColor};
+`;
+
 export const PlaylistCard: FC<PlaylistCardProps> = (props) => {
   const { coverImageUrl, playlistName, width = 100 } = props;
 
   return (
     <>
-      <PlaylistButton backGroundColor="dark" width={width}>
+      <EnhancedStyledButton backgroundColor={colorPicker('dark')} width={width}>
         {coverImageUrl === undefined ? (
           <StyledImage className="content" src={NoCoverImage} />
         ) : (
           <StyledImage className="content" src={coverImageUrl} />
         )}
-        <StyledCardTitle>{playlistName}</StyledCardTitle>
-      </PlaylistButton>
+        <StyledCardTitle color={colorPicker('white')}>
+          {playlistName}
+        </StyledCardTitle>
+      </EnhancedStyledButton>
     </>
   );
 };
