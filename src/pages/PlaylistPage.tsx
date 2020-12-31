@@ -15,7 +15,7 @@ const StyledInfiniteScroll = styled(InfiniteScroll)`
 export const PlaylistPage: FC = () => {
   const [playlists, isFetching, fetchNext] = useMyPlaylist({
     accessToken: getAccessToken(),
-    limit: 5,
+    limit: 20,
     offset: 0,
   });
 
