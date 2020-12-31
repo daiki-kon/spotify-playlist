@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Redirect, Route, RouteProps } from 'react-router';
+import { Redirect, Route } from 'react-router';
 import {
   formatParams,
   isValidState,
