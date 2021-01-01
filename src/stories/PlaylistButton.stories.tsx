@@ -4,15 +4,15 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Story, Meta } from '@storybook/react/types-6-0';
 
-import { StyledButton } from '../components/StyledButton';
+import { StyledPlaylistButton } from '../components/StyledPlaylistButton';
 
 export default {
   title: 'components/PlaylistButton',
-  component: StyledButton,
+  component: StyledPlaylistButton,
 } as Meta;
 
 const Template: Story = (args: any) => (
-  <StyledButton {...args}> {args.children}</StyledButton>
+  <StyledPlaylistButton {...args}> {args.children}</StyledPlaylistButton>
 );
 
 export const Primary = Template.bind({});

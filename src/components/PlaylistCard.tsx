@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Image } from 'semantic-ui-react';
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
-import { StyledButton } from './StyledButton';
+import { StyledPlaylistButton } from './StyledPlaylistButton';
 import { colorPicker } from '../utils/Color';
 import NoCoverImage from '../assets/NoCoverImage.png';
 
@@ -31,7 +31,9 @@ const StyledCardTitle = styled.p<{ color: string }>`
   white-space: nowrap;
 `;
 
-const EnhancedStyledButton = styled(StyledButton)<{ backgroundColor: string }>`
+const EnhancedStyledButton = styled(StyledPlaylistButton)<{
+  backgroundColor: string;
+}>`
   background-color: ${(props) => props.backgroundColor};
 `;
 

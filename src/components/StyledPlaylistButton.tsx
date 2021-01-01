@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
 
-export const StyledButton = styled.button<{ width: number }>`
+export const StyledPlaylistButton = styled.button<{ width: number }>`
   position: relative;
   width: ${(props) => props.width || 100}%;
   max-width: 240px;

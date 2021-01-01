@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 import { Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import styled from 'styled-components';
-import { StyledButton } from './StyledButton';
+import { StyledPlaylistButton } from './StyledPlaylistButton';
 import { colorPicker } from '../utils/Color';
 
 export type CreatePlaylistButtonProps = {
   width?: number;
 };
 
-const EnhancedStyledButton = styled(StyledButton)<{
+const EnhancedStyledButton = styled(StyledPlaylistButton)<{
   baseColor: string;
   gradationColor: string;
 }>`
