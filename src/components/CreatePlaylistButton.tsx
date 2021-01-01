@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Icon } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import styled from 'styled-components';
-import { StyledButton } from './PlaylistButton';
+import { StyledButton } from './StyledButton';
 import { colorPicker } from '../utils/Color';
 
 export type CreatePlaylistButtonProps = {

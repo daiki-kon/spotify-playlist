@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Image } from 'semantic-ui-react';
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
-import { StyledButton } from './PlaylistButton';
+import { StyledButton } from './StyledButton';
 import { colorPicker } from '../utils/Color';
 import NoCoverImage from '../assets/NoCoverImage.png';
 

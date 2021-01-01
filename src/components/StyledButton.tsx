@@ -1,15 +1,9 @@
-import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
 
-export type PlaylistButtonProps = {
-  width?: number;
-  children: ReactNode;
-};
-
 export const StyledButton = styled.button<{ width: number }>`
   position: relative;
-  width: ${(props) => props.width}%;
+  width: ${(props) => props.width || 100}%;
   max-width: 240px;
   padding: 10px;
   border-radius: 10px;
@@ -29,13 +23,3 @@ export const StyledButton = styled.button<{ width: number }>`
     top: 0;
   }
 `;
-
-export const PlaylistButton: FC<PlaylistButtonProps> = (props) => {
-  const { children, width = 100 } = props;
-
-  return (
-    <>
-      <StyledButton width={width}>{children}</StyledButton>
-    </>
-  );
-};
