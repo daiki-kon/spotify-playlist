@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export type PlaylistItems = {
+export type Playlists = {
   total: number;
   items: {
     id: string;
@@ -20,9 +20,9 @@ export const useMyPlaylist = ({
   limit: number;
   offset: number;
   // eslint-disable-next-line no-unused-vars
-}): [PlaylistItems, boolean, (nextUrl: string) => void] => {
+}): [Playlists, boolean, (nextUrl: string) => void] => {
   const [isFetching, setIsFetching] = useState<boolean>(true);
-  const [playlists, setPlaylists] = useState<PlaylistItems>({
+  const [playlists, setPlaylists] = useState<Playlists>({
     total: 0,
     items: [],
     next: '',
@@ -42,7 +42,7 @@ export const useMyPlaylist = ({
         },
       });
 
-      const playlistItems: PlaylistItems = await response.json();
+      const playlistItems: Playlists = await response.json();
       setPlaylists((preState) => ({
         total: playlistItems.total,
         next: playlistItems.next,

@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Loader } from 'semantic-ui-react';
-import { PlaylistItems } from '../hooks/useMyPlaylists';
+import { Playlists } from '../hooks/useMyPlaylists';
 import { PlaylistCard } from './PlaylistCard';
 import { CreatePlaylistButton } from './CreatePlaylistButton';
 import 'semantic-ui-css/semantic.min.css';
 
 export type PlaylistsTileProps = {
   isFetching: boolean;
-  playlists: PlaylistItems;
+  playlists: Playlists;
 };
 
 const StyledLoader = styled(Loader)`
