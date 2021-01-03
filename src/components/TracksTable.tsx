@@ -10,6 +10,14 @@ export type TracksTableProps = {
   tracks: PlaylistItems;
 };
 
+const StyledAlbumCell = styled(Table.Cell)`
+  max-width: 200px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
 export const TracksTable: FC<TracksTableProps> = (props) => {
   const { tracks } = props;
 
@@ -22,16 +30,16 @@ export const TracksTable: FC<TracksTableProps> = (props) => {
         </Table.Row>
       </Table.Header>
       {tracks.items.map((item) => (
-        <tr key={item.track.id}>
-          <td>
+        <Table.Row key={item.track.id}>
+          <Table.Cell>
             <TrackInfo
               coverImageUrl={item.track.album.images[0].url}
               trackName={item.track.name}
               artistsNameList={item.track.artists.map((artist) => artist.name)}
             />
-          </td>
-          <td>{item.track.name}</td>
-        </tr>
+          </Table.Cell>
+          <StyledAlbumCell>{item.track.name}</StyledAlbumCell>
+        </Table.Row>
       ))}
     </Table>
   );
