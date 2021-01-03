@@ -12,6 +12,7 @@ export type PlaylistItems = {
         name: string;
       }[];
       name: string;
+      id: string;
     };
   }[];
   next: string;
