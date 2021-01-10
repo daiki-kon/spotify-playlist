@@ -6,9 +6,10 @@ import { StyledPlaylistButton } from './StyledPlaylistButton';
 import { colorPicker } from '../utils/Color';
 import NoCoverImage from '../assets/NoCoverImage.png';
 
-export type PlaylistCardProps = {
+export type ImageCardProps = {
   coverImageUrl: string;
-  playlistName: string;
+  title: string;
+  subTitle?: string;
   width?: number;
 };
 
@@ -17,11 +18,16 @@ const StyledImage = styled(Image)`
   margin: auto;
 `;
 
-const StyledCardTitle = styled.p<{ color: string }>`
-  font-size: 16px;
+const StyledText = styled.p<{
+  fontSize: number;
+  bold?: boolean;
+  color: string;
+}>`
+  font-size: ${(props) => props.fontSize};
   font-family: Arial;
+  ${(props) => (props.bold ? `font-weight: bold;` : ``)}
+  margin-bottom: 0px;
   color: ${(props) => props.color};
-  padding-bottom: 5%;
   text-align: left;
   word-wrap: break-word;
   text-overflow: ellipsis;
@@ -37,8 +43,8 @@ const EnhancedStyledButton = styled(StyledPlaylistButton)<{
   background-color: ${(props) => props.backgroundColor};
 `;
 
-export const PlaylistCard: FC<PlaylistCardProps> = (props) => {
-  const { coverImageUrl, playlistName, width = 100 } = props;
+export const ImageCard: FC<ImageCardProps> = (props) => {
+  const { coverImageUrl, title, subTitle, width = 100 } = props;
 
   return (
     <>
@@ -48,9 +54,16 @@ export const PlaylistCard: FC<PlaylistCardProps> = (props) => {
         ) : (
           <StyledImage className="content" src={coverImageUrl} />
         )}
-        <StyledCardTitle color={colorPicker('white')}>
-          {playlistName}
-        </StyledCardTitle>
+        <StyledText fontSize={16} bold color={colorPicker('white')}>
+          {title}
+        </StyledText>
+        {subTitle !== undefined ? (
+          <StyledText fontSize={15} color={colorPicker('subTitle')}>
+            {subTitle}
+          </StyledText>
+        ) : (
+          <></>
+        )}
       </EnhancedStyledButton>
     </>
   );

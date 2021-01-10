@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Loader } from 'semantic-ui-react';
 import { Playlists } from '../hooks/useMyPlaylists';
-import { PlaylistCard } from './PlaylistCard';
+import { ImageCard } from './ImageCard';
 import { CreatePlaylistButton } from './CreatePlaylistButton';
 import 'semantic-ui-css/semantic.min.css';
 
@@ -34,10 +34,10 @@ export const PlaylistsTile: FC<PlaylistsTileProps> = (props) => {
         <StyledGrid>
           <CreatePlaylistButton />
           {playlists.items.map((item) => (
-            <PlaylistCard
+            <ImageCard
               key={item.id}
               coverImageUrl={item.images[0]?.url}
-              playlistName={item.name}
+              title={item.name}
             />
           ))}
         </StyledGrid>
