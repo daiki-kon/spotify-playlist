@@ -5,6 +5,7 @@ export const StyledPlaylistButton = styled.button<{ width: number }>`
   position: relative;
   width: ${(props) => props.width || 100}%;
   max-width: 240px;
+  min-width: 190px;
   padding: 10px;
   border-radius: 10px;
   /* アウトライン削除 */

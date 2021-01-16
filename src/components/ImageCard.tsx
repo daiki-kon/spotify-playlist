@@ -1,21 +1,31 @@
 import React, { FC } from 'react';
 import { Image } from 'semantic-ui-react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
 import { StyledPlaylistButton } from './StyledPlaylistButton';
 import { colorPicker } from '../utils/Color';
 import NoCoverImage from '../assets/NoCoverImage.png';
+import NoCoverArtist from '../assets/NoCoverArtist.png';
 
 export type ImageCardProps = {
-  coverImageUrl: string;
+  type: 'album' | 'artist';
+  coverImageUrl?: string;
   title: string;
   subTitle?: string;
   width?: number;
 };
 
-const StyledImage = styled(Image)`
+const artistStyle = css`
+  width: 170px;
+  height: 187px;
+  object-fit: cover;
+  border-radius: 50%;
+`;
+
+const StyledImage = styled(Image)<{ artist?: boolean }>`
   padding-bottom: 10%;
   margin: auto;
+  ${(props) => (props.artist ? artistStyle : ``)}
 `;
 
 const StyledText = styled.p<{
@@ -25,7 +35,7 @@ const StyledText = styled.p<{
 }>`
   font-size: ${(props) => props.fontSize};
   font-family: Arial;
-  ${(props) => (props.bold ? `font-weight: bold;` : ``)}
+  ${(props) => (props.bold ? `font-weight: bold;` : ``)};
   margin-bottom: 0px;
   color: ${(props) => props.color};
   text-align: left;
@@ -44,15 +54,23 @@ const EnhancedStyledButton = styled(StyledPlaylistButton)<{
 `;
 
 export const ImageCard: FC<ImageCardProps> = (props) => {
-  const { coverImageUrl, title, subTitle, width = 100 } = props;
+  const { type, coverImageUrl, title, subTitle, width = 100 } = props;
 
   return (
     <>
       <EnhancedStyledButton backgroundColor={colorPicker('dark')} width={width}>
         {coverImageUrl === undefined ? (
-          <StyledImage className="content" src={NoCoverImage} />
+          <StyledImage
+            className="content"
+            src={type === 'album' ? NoCoverImage : NoCoverArtist}
+            artist={type === 'artist'}
+          />
         ) : (
-          <StyledImage className="content" src={coverImageUrl} />
+          <StyledImage
+            className="content"
+            src={coverImageUrl}
+            artist={type === 'artist'}
+          />
         )}
         <StyledText fontSize={16} bold color={colorPicker('white')}>
           {title}

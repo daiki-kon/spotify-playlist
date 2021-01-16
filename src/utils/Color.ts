@@ -1,4 +1,4 @@
-export type Color = 'dark' | 'blue' | 'white';
+export type Color = 'dark' | 'blue' | 'subTitle' | 'white';
 
 export const colorPicker = (color: Color) => {
   switch (color) {
@@ -6,6 +6,8 @@ export const colorPicker = (color: Color) => {
       return '#262626';
     case 'blue':
       return '#450AF3';
+    case 'subTitle':
+      return '#b2b2b2';
     case 'white':
       return '#ffffff';
     default:

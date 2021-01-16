@@ -17,6 +17,7 @@ const Template: Story<ImageCardProps> = (args: ImageCardProps) => {
 
 export const Primary = Template.bind({});
 Primary.args = {
+  type: 'album',
   coverImageUrl:
     'https://i.scdn.co/image/ab67616d0000b273233906d0f076db62a4f819d0',
   title: '洋楽',
@@ -25,9 +26,24 @@ Primary.args = {
 
 export const Subtitle = Template.bind({});
 Subtitle.args = {
+  type: 'album',
   coverImageUrl:
     'https://i.scdn.co/image/ab67616d0000b273233906d0f076db62a4f819d0',
   title: 'Tik Tok',
   subTitle: 'ケシャ',
+  width: 20,
+};
+
+export const NoCoverAlbum = Template.bind({});
+NoCoverAlbum.args = {
+  type: 'album',
+  title: 'Tik Tok',
+  width: 20,
+};
+
+export const NoCoverArtist = Template.bind({});
+NoCoverArtist.args = {
+  type: 'artist',
+  title: 'ケシャ',
   width: 20,
 };

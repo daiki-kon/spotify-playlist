@@ -36,6 +36,7 @@ export const PlaylistsTile: FC<PlaylistsTileProps> = (props) => {
           {playlists.items.map((item) => (
             <ImageCard
               key={item.id}
+              type="album"
               coverImageUrl={item.images[0]?.url}
               title={item.name}
             />
