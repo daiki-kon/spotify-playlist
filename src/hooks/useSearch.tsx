@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { CLIENT_RENEG_LIMIT } from 'tls';
 
 export type SearchedTrack = {
   tracks: {
@@ -84,7 +83,6 @@ export const useSearch = ({
     );
 
     const tracks: SearchedTrack = await response.json();
-    console.log('tracks:', tracks);
     setSearchedTracks(tracks);
   }, [accessToken, limit, query]);
 
@@ -102,8 +100,6 @@ export const useSearch = ({
     );
 
     const albums: SearchedAlbum = await response.json();
-    console.log('album:', albums);
-
     setSearchedAlbums(albums);
   }, [accessToken, limit, query]);
 
@@ -121,8 +117,6 @@ export const useSearch = ({
     );
 
     const artists: SearchedArtist = await response.json();
-
-    console.log('artist:', artists);
     setSearchedArtists(artists);
   }, [accessToken, limit, query]);
 

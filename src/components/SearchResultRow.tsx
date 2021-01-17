@@ -1,7 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Item, ItemDescription } from 'semantic-ui-react';
-import { Subtitle } from 'stories/ImageCard.stories';
 import { ImageCard } from './ImageCard';
 import { colorPicker } from '../utils/Color';
 import {
@@ -9,7 +7,6 @@ import {
   SearchedAlbum,
   SearchedArtist,
 } from '../hooks/useSearch';
-import img from '../assets/NoCoverArtist.png';
 
 export type SearchResultRowProps = {
   searchedItem: SearchedTrack | SearchedAlbum | SearchedArtist;
@@ -58,7 +55,7 @@ export const SearchResultRow: FC<SearchResultRowProps> = (props) => {
             id: item.id,
             title: item.name,
             subTitle: item.artists.map((artist) => artist.name).join(),
-            coverImageUrl: item.album.images[0].url,
+            coverImageUrl: item.album.images[0]?.url,
           })),
         ],
       });
@@ -70,7 +67,7 @@ export const SearchResultRow: FC<SearchResultRowProps> = (props) => {
             id: item.id,
             title: item.name,
             subTitle: item.artists.map((artist) => artist.name).join(),
-            coverImageUrl: item.images[0].url,
+            coverImageUrl: item.images[0]?.url,
           })),
         ],
       });
