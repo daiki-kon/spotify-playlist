@@ -22,10 +22,10 @@ const artistStyle = css`
   border-radius: 50%;
 `;
 
-const StyledImage = styled(Image)<{ artist?: boolean }>`
+const StyledImage = styled(Image)<{ artist: boolean }>`
   padding-bottom: 10%;
   margin: auto;
-  ${(props) => (props.artist ? artistStyle : ``)}
+  ${(props) => (props.$artist ? artistStyle : ``)}
 `;
 
 const StyledText = styled.p<{
@@ -61,16 +61,11 @@ export const ImageCard: FC<ImageCardProps> = (props) => {
       <EnhancedStyledButton backgroundColor={colorPicker('dark')} width={width}>
         {coverImageUrl === undefined ? (
           <StyledImage
-            className="content"
             src={type === 'album' ? NoCoverImage : NoCoverArtist}
-            artist={type === 'artist'}
+            $artist={type === 'artist'}
           />
         ) : (
-          <StyledImage
-            className="content"
-            src={coverImageUrl}
-            artist={type === 'artist'}
-          />
+          <StyledImage src={coverImageUrl} $artist={type === 'artist'} />
         )}
         <StyledText fontSize={16} bold color={colorPicker('white')}>
           {title}
