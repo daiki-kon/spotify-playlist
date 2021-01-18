@@ -5,10 +5,9 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import { TracksTable, TracksTableProps } from '../components/TracksTable';
-import { usePlaylistItems } from '../hooks/usePlaylistItem';
 
 export default {
-  title: 'components/PlaylistTable',
+  title: 'components/TracksTable',
   component: TracksTable,
 } as Meta;
 
