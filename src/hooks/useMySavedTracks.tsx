@@ -9,7 +9,8 @@ export const useMySavedTracks = ({
   accessToken: string;
   limit: number;
   offset: number;
-}) => {
+  // eslint-disable-next-line no-unused-vars
+}): [TracksType, boolean, (nextUrl: string) => void] => {
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [savedTracks, setSavedTracks] = useState<TracksType>({
     total: 0,
