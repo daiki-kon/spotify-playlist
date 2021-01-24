@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
 import InfiniteScroll from 'react-infinite-scroller';
-import { PlaylistItems } from '../hooks/usePlaylistItem';
+import { TracksType } from '../types/TracksType';
 import { TracksTable } from '../components/TracksTable';
 
 export type TracksTableContainerProps = {
-  tracks: PlaylistItems;
+  tracks: TracksType;
   // eslint-disable-next-line no-unused-vars
   fetchNext: (nextUrl: string) => void;
 };

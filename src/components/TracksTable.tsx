@@ -2,12 +2,11 @@ import React, { FC } from 'react';
 import { Table } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import styled from 'styled-components';
-
-import { PlaylistItems } from '../hooks/usePlaylistItem';
+import { TracksType } from '../types/TracksType';
 import { TrackInfo } from './TrackInfo';
 
 export type TracksTableProps = {
-  tracks: PlaylistItems;
+  tracks: TracksType;
 };
 
 const StyledAlbumCell = styled(Table.Cell)`

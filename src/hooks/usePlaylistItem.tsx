@@ -1,22 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-
-export type PlaylistItems = {
-  total: number;
-  items: {
-    track: {
-      album: {
-        name: string;
-        images: { url: string }[];
-      };
-      artists: {
-        name: string;
-      }[];
-      name: string;
-      id: string;
-    };
-  }[];
-  next: string;
-};
+import { TracksType } from '../types/TracksType';
 
 export const usePlaylistItems = ({
   accessToken,
@@ -29,8 +12,8 @@ export const usePlaylistItems = ({
   limit: number;
   offset: number;
   // eslint-disable-next-line no-unused-vars
-}): [PlaylistItems, boolean, (nextUrl: string) => void] => {
-  const [playlistItems, setPlaylistItems] = useState<PlaylistItems>({
+}): [TracksType, boolean, (nextUrl: string) => void] => {
+  const [playlistItems, setPlaylistItems] = useState<TracksType>({
     total: 0,
     items: [],
     next: '',
@@ -51,7 +34,7 @@ export const usePlaylistItems = ({
         },
       });
 
-      const trackItems: PlaylistItems = await response.json();
+      const trackItems: TracksType = await response.json();
       setPlaylistItems((preState) => ({
         total: trackItems.total,
         next: trackItems.next,
