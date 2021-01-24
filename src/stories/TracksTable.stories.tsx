@@ -24,6 +24,7 @@ Primary.args = {
       {
         track: {
           album: {
+            id: '',
             name: '文化',
             images: [
               {
@@ -32,7 +33,7 @@ Primary.args = {
               },
             ],
           },
-          artists: [{ name: 'Eve' }],
+          artists: [{ id: '', name: 'Eve' }],
           name: 'ドラマツルギー',
           id: '44i0yotEYW72i9QbpWcn6y',
         },
@@ -40,6 +41,7 @@ Primary.args = {
       {
         track: {
           album: {
+            id: '',
             name: 'Take Off Your Colours',
             images: [
               {
@@ -48,7 +50,7 @@ Primary.args = {
               },
             ],
           },
-          artists: [{ name: 'ユー・ミー・アット・シックス' }],
+          artists: [{ id: '', name: 'ユー・ミー・アット・シックス' }],
           name: 'If I Were In Your Shoes',
           id: '5DdHUFL088qi98xCzw4v33',
         },
@@ -56,6 +58,7 @@ Primary.args = {
       {
         track: {
           album: {
+            id: '',
             name: 'Shout to the Walls!',
             images: [
               {
@@ -64,7 +67,7 @@ Primary.args = {
               },
             ],
           },
-          artists: [{ name: 'NICO Touches the Walls' }],
+          artists: [{ id: '', name: 'NICO Touches the Walls' }],
           name: '夏の大三角形',
           id: '7jgpA3tD2n9oyPVdNf5Kd3',
         },
