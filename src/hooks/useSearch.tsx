@@ -52,6 +52,7 @@ type useSearchResponse = [
   SearchedTrack,
   SearchedAlbum,
   SearchedArtist,
+  // eslint-disable-next-line no-unused-vars
   (query: string) => void,
 ];
 
