@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 export type SearchedTrack = {
   tracks: {
@@ -48,15 +48,18 @@ export type SearchedArtist = {
   };
 };
 
-type useSearchResponse = [SearchedTrack, SearchedAlbum, SearchedArtist];
+type useSearchResponse = [
+  SearchedTrack,
+  SearchedAlbum,
+  SearchedArtist,
+  (query: string) => void,
+];
 
 export const useSearch = ({
   accessToken,
-  query,
   limit = 25,
 }: {
   accessToken: string;
-  query: string;
   limit?: number;
 }): useSearchResponse => {
   const [searchedTracks, setSearchedTracks] = useState<SearchedTrack>({
@@ -69,62 +72,71 @@ export const useSearch = ({
     artists: { items: [] },
   });
 
-  const fetchTrack = useCallback(async (): Promise<void> => {
-    const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${query}&type=track&market=JP&limit=${limit}&offset=0`,
-      {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
+  const fetchTrack = useCallback(
+    async (query: string): Promise<void> => {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${query}&type=track&market=JP&limit=${limit}&offset=0`,
+        {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
         },
-      },
-    );
+      );
 
-    const tracks: SearchedTrack = await response.json();
-    setSearchedTracks(tracks);
-  }, [accessToken, limit, query]);
+      const tracks: SearchedTrack = await response.json();
+      setSearchedTracks(tracks);
+    },
+    [accessToken, limit],
+  );
 
-  const fetchAlbum = useCallback(async (): Promise<void> => {
-    const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${query}&type=album&market=JP&limit=${limit}&offset=0`,
-      {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
+  const fetchAlbum = useCallback(
+    async (query: string): Promise<void> => {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${query}&type=album&market=JP&limit=${limit}&offset=0`,
+        {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
         },
-      },
-    );
+      );
 
-    const albums: SearchedAlbum = await response.json();
-    setSearchedAlbums(albums);
-  }, [accessToken, limit, query]);
+      const albums: SearchedAlbum = await response.json();
+      setSearchedAlbums(albums);
+    },
+    [accessToken, limit],
+  );
 
-  const fetchArtist = useCallback(async (): Promise<void> => {
-    const response = await fetch(
-      `https://api.spotify.com/v1/search?q=${query}&type=artist&market=JP&limit=${limit}&offset=0`,
-      {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
+  const fetchArtist = useCallback(
+    async (query: string): Promise<void> => {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${query}&type=artist&market=JP&limit=${limit}&offset=0`,
+        {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
         },
-      },
-    );
+      );
 
-    const artists: SearchedArtist = await response.json();
-    setSearchedArtists(artists);
-  }, [accessToken, limit, query]);
+      const artists: SearchedArtist = await response.json();
+      setSearchedArtists(artists);
+    },
+    [accessToken, limit],
+  );
 
-  useEffect(() => {
-    fetchTrack();
-    fetchAlbum();
-    fetchArtist();
-  }, [fetchAlbum, fetchArtist, fetchTrack]);
+  const search = (query: string): void => {
+    fetchTrack(query);
+    fetchAlbum(query);
+    fetchArtist(query);
+  };
 
-  return [searchedTracks, searchedAlbums, searchedArtists];
+  return [searchedTracks, searchedAlbums, searchedArtists, search];
 };
