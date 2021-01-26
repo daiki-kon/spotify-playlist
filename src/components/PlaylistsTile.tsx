@@ -9,6 +9,8 @@ import 'semantic-ui-css/semantic.min.css';
 export type PlaylistsTileProps = {
   isFetching: boolean;
   playlists: Playlists;
+  // eslint-disable-next-line no-unused-vars
+  onClickPlaylist: (id: string | undefined) => void;
 };
 
 const StyledLoader = styled(Loader)`
@@ -24,7 +26,7 @@ const StyledGrid = styled.div`
 `;
 
 export const PlaylistsTile: FC<PlaylistsTileProps> = (props) => {
-  const { isFetching, playlists } = props;
+  const { isFetching, playlists, onClickPlaylist } = props;
 
   return (
     <>
@@ -39,6 +41,8 @@ export const PlaylistsTile: FC<PlaylistsTileProps> = (props) => {
               type="album"
               coverImageUrl={item.images[0]?.url}
               title={item.name}
+              id={item.id}
+              onClick={onClickPlaylist}
             />
           ))}
         </StyledGrid>
