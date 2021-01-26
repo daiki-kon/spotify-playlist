@@ -2,13 +2,12 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import 'semantic-ui-css/semantic.min.css';
 import InfiniteScroll from 'react-infinite-scroller';
-import { TracksType } from '../types/TracksType';
 import { TracksTable } from '../components/TracksTable';
+import { usePlaylistItems } from '../hooks/usePlaylistItem';
+import { getAccessToken } from '../utils/Environment';
 
-export type TracksTableContainerProps = {
-  tracks: TracksType;
-  // eslint-disable-next-line no-unused-vars
-  fetchNext: (nextUrl: string) => void;
+export type PlaylistTracksTableContainerProps = {
+  playlistId: string;
 };
 
 const Wrapper = styled.div`
@@ -16,14 +15,25 @@ const Wrapper = styled.div`
   height: 300px;
 `;
 
-export const TracksTableContainer: FC<TracksTableContainerProps> = (props) => {
-  const { tracks, fetchNext } = props;
+export const PlaylistTracksTableContainer: FC<PlaylistTracksTableContainerProps> = (
+  props,
+) => {
+  const { playlistId } = props;
+  const [playlistItems, , fetchNext] = usePlaylistItems({
+    accessToken: getAccessToken(),
+    limit: 20,
+    offset: 0,
+    playlistId,
+  });
 
   const loadMore = (): void => {
-    if (tracks.next !== '' && tracks.items.length >= tracks.total) {
+    if (
+      playlistItems.next !== '' &&
+      playlistItems.items.length >= playlistItems.total
+    ) {
       return;
     }
-    fetchNext(tracks.next);
+    fetchNext(playlistItems.next);
   };
 
   return (
@@ -31,12 +41,12 @@ export const TracksTableContainer: FC<TracksTableContainerProps> = (props) => {
       <InfiniteScroll
         pageStart={0}
         initialLoad={false}
-        hasMore={tracks.items.length <= tracks.total}
+        hasMore={playlistItems.items.length <= playlistItems.total}
         loadMore={loadMore}
         useWindow={false}
         // TODO: スクロールしてAPI叩きに行ってるときの処理を考える=>loadingね
       >
-        <TracksTable tracks={tracks} />
+        <TracksTable tracks={playlistItems} />
       </InfiniteScroll>
     </Wrapper>
   );
