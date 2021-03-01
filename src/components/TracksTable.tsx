@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 import styled from 'styled-components';
 import { TracksType } from '../types/TracksType';
 import { TrackInfo } from './TrackInfo';
+import { colorPicker } from '../utils/Color';
 
 export type TracksTableProps = {
   tracks: TracksType;
@@ -17,6 +18,15 @@ const StyledAlbumCell = styled(Table.Cell)`
   white-space: nowrap;
 `;
 
+const StyledHeaderCell = styled(Table.HeaderCell)<{ color: string }>`
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  /* tbody内のセルより手前に表示する */
+  z-index: 1;
+  background-color: ${(props) => props.color} !important;
+`;
+
 export const TracksTable: FC<TracksTableProps> = (props) => {
   const { tracks } = props;
 
@@ -24,8 +34,12 @@ export const TracksTable: FC<TracksTableProps> = (props) => {
     <Table inverted>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>タイトル</Table.HeaderCell>
-          <Table.HeaderCell>アルバム</Table.HeaderCell>
+          <StyledHeaderCell color={colorPicker('dark')}>
+            タイトル
+          </StyledHeaderCell>
+          <StyledHeaderCell color={colorPicker('dark')}>
+            アルバム
+          </StyledHeaderCell>
         </Table.Row>
       </Table.Header>
       {tracks.items.map((item) => (
