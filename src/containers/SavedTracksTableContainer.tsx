@@ -6,8 +6,8 @@ import { TracksTable } from '../components/TracksTable';
 import { getAccessToken } from '../utils/Environment';
 
 const Wrapper = styled.div`
-  overflow: auto;
-  height: 300px;
+  overflow: scroll;
+  height: 90%;
 `;
 
 export const SavedTracksTableContainer: FC = () => {

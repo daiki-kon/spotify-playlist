@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Redirect, Route } from 'react-router';
+import { Redirect, Route, Switch, RouteProps } from 'react-router';
 import {
   formatParams,
   isValidState,
@@ -10,7 +10,7 @@ import {
 } from './utils/AuthSpotify';
 import { PlaylistPage } from './pages/PlaylistPage';
 
-export const AuthWrapper: FC = () => {
+export const AuthWrapper: FC<RouteProps> = (props) => {
   const [isFail, setIsFail] = useState(false);
 
   const saveAccessToken = async (code: string): Promise<void> => {
@@ -58,7 +58,9 @@ export const AuthWrapper: FC = () => {
     // 認証に失敗 => スタートページヘリダイレクト
     //      成功 => PlaylistPageをレンダリング
     <Route
-      render={() => (isFail ? <Redirect to="StartPage" /> : <PlaylistPage />)}
+      render={() =>
+        isFail ? <Redirect to="StartPage" /> : <Route {...props} />
+      }
     />
   );
 };

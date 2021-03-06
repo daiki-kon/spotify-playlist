@@ -13,6 +13,9 @@ export type ImageCardProps = {
   title: string;
   subTitle?: string;
   width?: number;
+  id?: string;
+  // eslint-disable-next-line no-unused-vars
+  onClick?: (id: string | undefined) => void;
 };
 
 const artistStyle = css`
@@ -54,11 +57,25 @@ const EnhancedStyledButton = styled(StyledPlaylistButton)<{
 `;
 
 export const ImageCard: FC<ImageCardProps> = (props) => {
-  const { type, coverImageUrl, title, subTitle, width = 100 } = props;
+  const {
+    type,
+    coverImageUrl,
+    title,
+    subTitle,
+    width = 100,
+    id,
+    // onClickを省略可能にするため何もしない関数をデフォルトに設定
+    // eslint-disable-next-line no-unused-vars
+    onClick = (_: string | undefined): void => {},
+  } = props;
 
   return (
     <>
-      <EnhancedStyledButton backgroundColor={colorPicker('dark')} width={width}>
+      <EnhancedStyledButton
+        backgroundColor={colorPicker('dark')}
+        width={width}
+        onClick={() => onClick(id)}
+      >
         {coverImageUrl === undefined ? (
           <StyledImage
             src={type === 'album' ? NoCoverImage : NoCoverArtist}
