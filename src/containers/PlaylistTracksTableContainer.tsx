@@ -11,8 +11,8 @@ export type PlaylistTracksTableContainerProps = {
 };
 
 const Wrapper = styled.div`
-  overflow: auto;
-  height: 300px;
+  overflow: scroll;
+  height: 90%;
 `;
 
 export const PlaylistTracksTableContainer: FC<PlaylistTracksTableContainerProps> = (

@@ -8,9 +8,15 @@ import { SavedTracksTableContainer } from '../containers/SavedTracksTableContain
 
 export type TracksTabProps = {};
 
+const StyledTab = styled(Tab)`
+  overflow: hidden;
+  padding: 0px;
+`;
+
 const StyledTabPane = styled(Tab.Pane)<{ background: string }>`
   background: ${(props) => props.background} !important;
   border: none !important;
+  height: 100%;
 `;
 
 export const TracksTab: FC<TracksTabProps> = () => {
@@ -37,7 +43,7 @@ export const TracksTab: FC<TracksTabProps> = () => {
 
   return (
     <>
-      <Tab
+      <StyledTab
         menu={{
           color: 'grey',
           inverted: true,
