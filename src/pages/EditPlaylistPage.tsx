@@ -2,16 +2,18 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Image } from 'semantic-ui-react';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { TracksTab } from '../components/TracksTab';
 import { PlaylistTracksTableContainer } from '../containers/PlaylistTracksTableContainer';
 import { colorPicker } from '../utils/Color';
-import NoCoverImage from '../assets/NoCoverImage.png';
 import {
   usePlaylistInfo,
   UsePlaylistInfoResponse,
 } from '../hooks/usePlaylistInfo';
 import { getAccessToken } from '../utils/Environment';
 import 'semantic-ui-css/semantic.min.css';
+import { useMySavedTracks } from '../hooks/useMySavedTracks';
+import { usePlaylistItems } from '../hooks/usePlaylistItem';
 
 const StyledGrid = styled.div`
   display: grid;
@@ -63,18 +65,50 @@ export const EditPlaylistPage: FC = () => {
     playlistId,
   });
 
+  const [savedTracks, , fetchNextSaved, removeItem] = useMySavedTracks({
+    accessToken: getAccessToken(),
+    limit: 20,
+    offset: 0,
+  });
+
+  const [playlistItems, , fetchNextItems] = usePlaylistItems({
+    accessToken: getAccessToken(),
+    limit: 20,
+    offset: 0,
+    playlistId,
+  });
+
+  const onDragEnd = (result: DropResult): void => {
+    const { source, destination } = result;
+    if (destination === null) return;
+
+    if (
+      source.droppableId === 'saved' &&
+      destination?.droppableId === 'playlist'
+    ) {
+      console.log(result);
+      console.log('ok');
+      removeItem(result.draggableId);
+    }
+  };
+
   return (
     <StyledGrid>
-      <TracksTab />
-      <StylePlaylistGrid background={colorPicker('dark')}>
-        <StyledPlaylistHeader>
-          <StyledCoverImage src={playlistInfo.imageUrl} />
-          <StyledLabel textColor={colorPicker('white')}>
-            {playlistInfo.name}
-          </StyledLabel>
-        </StyledPlaylistHeader>
-        <PlaylistTracksTableContainer playlistId={playlistId} />
-      </StylePlaylistGrid>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <TracksTab savedTracks={savedTracks} fetchNext={fetchNextSaved} />
+        <StylePlaylistGrid background={colorPicker('dark')}>
+          <StyledPlaylistHeader>
+            <StyledCoverImage src={playlistInfo.imageUrl} />
+            <StyledLabel textColor={colorPicker('white')}>
+              {playlistInfo.name}
+            </StyledLabel>
+          </StyledPlaylistHeader>
+          <PlaylistTracksTableContainer
+            playlistItems={playlistItems}
+            fetchNext={fetchNextItems}
+          />
+        </StylePlaylistGrid>
+      </DragDropContext>
     </StyledGrid>
   );
 };
