@@ -34,7 +34,7 @@ export const PlaylistsTile: FC<PlaylistsTileProps> = (props) => {
         <StyledLoader active />
       ) : (
         <StyledGrid>
-          <CreatePlaylistButton />
+          {/* <CreatePlaylistButton /> */}
           {playlists.items.map((item) => (
             <ImageCard
               key={item.id}
