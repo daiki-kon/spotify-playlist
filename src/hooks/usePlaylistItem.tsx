@@ -12,7 +12,12 @@ export const usePlaylistItems = ({
   limit: number;
   offset: number;
   // eslint-disable-next-line no-unused-vars
-}): [TracksType, boolean, (nextUrl: string) => void] => {
+}): [
+  TracksType,
+  boolean,
+  (nextUrl: string) => void,
+  (trackId: string) => void,
+] => {
   const [playlistItems, setPlaylistItems] = useState<TracksType>({
     total: 0,
     items: [],
@@ -49,11 +54,42 @@ export const usePlaylistItems = ({
     setFetchURL(nextUrl);
   };
 
+  const removeDuplicate = (tracks: TracksType): TracksType => {
+    const trackIds = [...new Set(tracks.items.map((item) => item.track.id))];
+    console.log(trackIds);
+
+    return {
+      ...tracks,
+      items: tracks.items.filter(
+        (item, index) => trackIds.indexOf(item.track.id) === index,
+      ),
+    };
+  };
+
+  const postItemToPlaylist = async (trackId: string) => {
+    const response = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=spotify:track:${trackId}`,
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+    console.log(response);
+  };
+
+  const registerTrack = (trackId: string): void => {
+    postItemToPlaylist(trackId);
+    setPlaylistItems((preState) => preState);
+  };
+
   useEffect(() => {
-    console.log('use effect');
     setIsFetching(true);
     fetchPlaylistItems(fetchUrl);
   }, [fetchPlaylistItems, fetchUrl]);
 
-  return [playlistItems, isFetching, fetchNext];
+  return [removeDuplicate(playlistItems), isFetching, fetchNext, registerTrack];
 };

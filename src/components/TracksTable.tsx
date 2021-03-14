@@ -56,13 +56,13 @@ export const TracksTable: FC<TracksTableProps> = (props) => {
               return (
                 <Draggable
                   key={item.track.id}
-                  draggableId={item.track.id}
+                  draggableId={`${item.track.id}-${tableType}`}
                   index={index}
                 >
                   {/* eslint-disable-next-line no-shadow */}
                   {(provided) => (
                     <tr
-                      key={`${item.track.id}id`}
+                      key={`${item.track.id}-${tableType}`}
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}

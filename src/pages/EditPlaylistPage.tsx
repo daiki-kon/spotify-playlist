@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { Image } from 'semantic-ui-react';
@@ -65,13 +65,13 @@ export const EditPlaylistPage: FC = () => {
     playlistId,
   });
 
-  const [savedTracks, , fetchNextSaved, removeItem] = useMySavedTracks({
+  const [savedTracks, , fetchNextSaved] = useMySavedTracks({
     accessToken: getAccessToken(),
     limit: 20,
     offset: 0,
   });
 
-  const [playlistItems, , fetchNextItems] = usePlaylistItems({
+  const [playlistItems, , fetchNextItems, registerTrack] = usePlaylistItems({
     accessToken: getAccessToken(),
     limit: 20,
     offset: 0,
@@ -82,15 +82,29 @@ export const EditPlaylistPage: FC = () => {
     const { source, destination } = result;
     if (destination === null) return;
 
+    // TODO: リファクタリング
     if (
       source.droppableId === 'saved' &&
       destination?.droppableId === 'playlist'
     ) {
+      if (
+        playlistItems.items.some(
+          (item) => item.track.id === result.draggableId.split('-')[0],
+        )
+      ) {
+        alert('すでに存在しているtrackです');
+
+        return;
+      }
+      registerTrack(result.draggableId.split('-')[0]);
       console.log(result);
-      console.log('ok');
-      removeItem(result.draggableId);
+      console.log(result.draggableId.split('-')[0]);
     }
   };
+
+  useEffect(() => {
+    console.log();
+  }, [playlistItems]);
 
   return (
     <StyledGrid>
