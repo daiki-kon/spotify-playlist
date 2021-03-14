@@ -5,8 +5,12 @@ import styled from 'styled-components';
 import { colorPicker } from '../utils/Color';
 import { SearchPanelContainer } from '../containers/SearchPanelContainer';
 import { SavedTracksTableContainer } from '../containers/SavedTracksTableContainer';
+import { TracksType } from '../types/TracksType';
 
-export type TracksTabProps = {};
+export type TracksTabProps = {
+  savedTracks: TracksType;
+  fetchNext: (nextUrl: string) => void;
+};
 
 const StyledTab = styled(Tab)`
   overflow: hidden;
@@ -19,23 +23,28 @@ const StyledTabPane = styled(Tab.Pane)<{ background: string }>`
   height: 100%;
 `;
 
-export const TracksTab: FC<TracksTabProps> = () => {
+export const TracksTab: FC<TracksTabProps> = (props) => {
+  const { savedTracks, fetchNext } = props;
+
   const panes = [
-    {
-      menuItem: {
-        content: '検索',
-      },
-      render: () => (
-        <StyledTabPane background={colorPicker('dark')}>
-          <SearchPanelContainer />
-        </StyledTabPane>
-      ),
-    },
+    // {
+    //   menuItem: {
+    //     content: '検索',
+    //   },
+    //   render: () => (
+    //     <StyledTabPane background={colorPicker('dark')}>
+    //       <SearchPanelContainer />
+    //     </StyledTabPane>
+    //   ),
+    // },
     {
       menuItem: 'お気に入り',
       render: () => (
         <StyledTabPane background={colorPicker('dark')}>
-          <SavedTracksTableContainer />
+          <SavedTracksTableContainer
+            savedTracks={savedTracks}
+            fetchNext={fetchNext}
+          />
         </StyledTabPane>
       ),
     },

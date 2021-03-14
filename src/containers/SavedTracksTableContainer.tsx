@@ -1,21 +1,24 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
-import { useMySavedTracks } from '../hooks/useMySavedTracks';
 import { TracksTable } from '../components/TracksTable';
 import { getAccessToken } from '../utils/Environment';
+import { TracksType } from '../types/TracksType';
 
 const Wrapper = styled.div`
   overflow: scroll;
   height: 90%;
 `;
 
-export const SavedTracksTableContainer: FC = () => {
-  const [savedTracks, , fetchNext] = useMySavedTracks({
-    accessToken: getAccessToken(),
-    limit: 20,
-    offset: 0,
-  });
+export type SavedTracksTableContainerProps = {
+  savedTracks: TracksType;
+  fetchNext: (nextUrl: string) => void;
+};
+
+export const SavedTracksTableContainer: FC<SavedTracksTableContainerProps> = (
+  props,
+) => {
+  const { savedTracks, fetchNext } = props;
 
   const loadMore = (): void => {
     if (
@@ -37,7 +40,7 @@ export const SavedTracksTableContainer: FC = () => {
         useWindow={false}
         // TODO: スクロールしてAPI叩きに行ってるときの処理を考える=>loadingね
       >
-        <TracksTable tracks={savedTracks} />
+        <TracksTable tracks={savedTracks} tableType="saved" />
       </InfiniteScroll>
     </Wrapper>
   );

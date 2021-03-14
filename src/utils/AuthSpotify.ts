@@ -5,6 +5,8 @@ const scopes: string[] = [
   'user-read-email',
   'playlist-read-private',
   'user-library-read',
+  'playlist-modify-public',
+  'playlist-modify-private',
 ];
 
 export const isValidAccessToken = (): boolean => {

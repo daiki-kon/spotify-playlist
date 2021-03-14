@@ -4,6 +4,7 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Story, Meta } from '@storybook/react/types-6-0';
 
+import { DragDropContext } from 'react-beautiful-dnd';
 import { TracksTable, TracksTableProps } from '../components/TracksTable';
 
 export default {
@@ -12,7 +13,9 @@ export default {
 } as Meta;
 
 const Template: Story<TracksTableProps> = (args: TracksTableProps) => (
-  <TracksTable {...args} />
+  <DragDropContext onDragEnd={() => {}}>
+    <TracksTable {...args} />
+  </DragDropContext>
 );
 
 export const Primary = Template.bind({});

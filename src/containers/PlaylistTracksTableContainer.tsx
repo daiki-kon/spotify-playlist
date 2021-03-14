@@ -5,9 +5,11 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { TracksTable } from '../components/TracksTable';
 import { usePlaylistItems } from '../hooks/usePlaylistItem';
 import { getAccessToken } from '../utils/Environment';
+import { TracksType } from '../types/TracksType';
 
 export type PlaylistTracksTableContainerProps = {
-  playlistId: string;
+  playlistItems: TracksType;
+  fetchNext: (nextUrl: string) => void;
 };
 
 const Wrapper = styled.div`
@@ -18,13 +20,7 @@ const Wrapper = styled.div`
 export const PlaylistTracksTableContainer: FC<PlaylistTracksTableContainerProps> = (
   props,
 ) => {
-  const { playlistId } = props;
-  const [playlistItems, , fetchNext] = usePlaylistItems({
-    accessToken: getAccessToken(),
-    limit: 20,
-    offset: 0,
-    playlistId,
-  });
+  const { playlistItems, fetchNext } = props;
 
   const loadMore = (): void => {
     if (
@@ -46,7 +42,7 @@ export const PlaylistTracksTableContainer: FC<PlaylistTracksTableContainerProps>
         useWindow={false}
         // TODO: スクロールしてAPI叩きに行ってるときの処理を考える=>loadingね
       >
-        <TracksTable tracks={playlistItems} />
+        <TracksTable tracks={playlistItems} tableType="playlist" />
       </InfiniteScroll>
     </Wrapper>
   );
